@@ -2,6 +2,11 @@ import { homedir } from "os";
 import { join } from "path";
 import {promises} from "fs";
 
+const DICTIONARY_WHEATHER = {
+    city: 'city',
+    token: 'token'
+}
+
 const filePath = join(homedir(), 'wheather-data.json');
 
 const saveKeyValue =  async (key, value) => {
@@ -34,4 +39,4 @@ const isExist = async (path) => {
     }
 }
 
-export { saveKeyValue, getValue };
+export { saveKeyValue, getValue, DICTIONARY_WHEATHER };
