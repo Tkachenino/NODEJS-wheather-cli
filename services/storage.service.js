@@ -27,7 +27,6 @@ const getValue = async (key) => {
         return data[key];
     } else {
         throw new Error('Файл хранения токена не обноружен')
-        // return undefined;
     }
 }
 

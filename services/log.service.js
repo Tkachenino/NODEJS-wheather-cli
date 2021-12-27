@@ -18,4 +18,14 @@ const helperLog = () => {
     `)
 };
 
-export { helperLog , errorLog, successLog };
+
+const resultLog = (data) => {
+    console.log(dedent`${chalk.bgGreen(' RESULT ')}: 
+    ГОРОД: ${data.name};
+    ОПИСАНИЕ: ${data.weather[0].description}
+    ТЕМПЕРАТУРА: ${data.main.temp}*C ощущается как ${data.main.feels_like}*C
+    СКОРОСТЬ ВЕТРА: ${data.wind.speed} м/с
+    `)
+};
+
+export { helperLog , errorLog, successLog, resultLog };

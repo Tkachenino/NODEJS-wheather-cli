@@ -29,15 +29,17 @@ const getWheatherByHttps = async (city = 'Nizhniy Novgorod') => {
     });
 }
 
-const getWheather = async (city = 'Nizhniy Novgorod') => {
+const getWheather = async () => {
     const token = await getValue(DICTIONARY_WHEATHER.token);
+    const city = await getValue(DICTIONARY_WHEATHER.city);
+
     if (!token) {
         errorLog('Токен не обноружен!!!');
         return;
     }
     const {data} = await axios.get(url, {
         params: {
-            q: process.env.CITY,
+            q: process.env.CITY ?? city,
             appid: process.env.TOKEN ?? token,
             units: 'metric',
             lang: 'ru'

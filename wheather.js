@@ -1,6 +1,6 @@
 import { getParams } from "./helper.js";
 import { getWheather } from "./services/api.service.js";
-import { errorLog, helperLog } from "./services/log.service.js";
+import { errorLog, helperLog, resultLog } from "./services/log.service.js";
 import { saveKeyValue, DICTIONARY_WHEATHER } from "./services/storage.service.js";
 
 const setToken = async (token) => {
@@ -13,13 +13,25 @@ const setToken = async (token) => {
      } catch (error) {
          errorLog(error.message);
      }
-}
+};
+
+const setCity = async (city) => {
+    if (!city) {
+        errorLog('Укажите город при помощи команды -с [CITY]')
+        return;
+    }
+     try {
+        await saveKeyValue(DICTIONARY_WHEATHER.city, city);
+     } catch (error) {
+         errorLog(error.message);
+     }
+};
 
 
 const getForecast = async () => {
     try {
         const resp = await getWheather();
-        console.log(resp);
+        resultLog(resp);
     } catch (e) {
         if (e?.response?.status == 401) {
             errorLog('Неправильно указ токен');
@@ -36,13 +48,15 @@ const initApp = () => {
     const [executer, file, ...rest] = process.argv;
     const params = getParams(rest);
     if (params.h) {
-        helperLog();
+        return helperLog();
     }
     if (params.t) {
-        setToken(params.t)
+        return setToken(params.t)
     }
-     getForecast();
-     
+    if (params.c) {
+        return setCity(params.c)
+    }
+    return getForecast();  
 };
 
 initApp();
