@@ -2,17 +2,11 @@ import chalk from "chalk";
 import dedent from "dedent";
 
 const successLog = (message) => {
-    console.log(dedent`${chalk.bgGreen(' SUCCESS ')}
-    ${chalk.blue(`Вас приветствует сервисный помошник`)}
-    Успех: ${message}
-    `)
+    console.log(dedent`${chalk.bgGreen(' SUCCESS ')}: ${message}`)
 }
 
 const errorLog = (error) => {
-    console.log(dedent`${chalk.bgRed(' ERROR ')}
-    ${chalk.blue(`Вас приветствует сервисный помошник`)}
-    Ошибка: ${error.message}
-    `)
+    console.log(dedent`${chalk.bgRed(' ERROR ')}: ${error}`)
 }
 
 const helperLog = () => {

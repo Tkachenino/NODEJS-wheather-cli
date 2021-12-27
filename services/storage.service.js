@@ -26,7 +26,8 @@ const getValue = async (key) => {
         const data = JSON.parse(file);
         return data[key];
     } else {
-        return undefined;
+        throw new Error('Файл хранения токена не обноружен')
+        // return undefined;
     }
 }
 
